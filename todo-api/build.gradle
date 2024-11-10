@@ -19,7 +19,9 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.swagger.core.v3:swagger-annotations:2.2.8'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -43,7 +45,8 @@ task buildSpringServer(type: org.openapitools.generator.gradle.plugin.tasks.Gene
 	apiPackage.set("com.example.todoapi.controller")
 	modelPackage.set("com.example.todoapi.model")
 	configOptions.set([
-			interfaceOnly: "true"
+			interfaceOnly: "true",
+			useSpringBoot3: "true"
 	])
 	globalProperties.set([
 			modelDocs: "false"
