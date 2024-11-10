@@ -28,8 +28,24 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// APIドキュメントを自動生成するためのタスク
 task buildApiDoc(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
 	generatorName.set("html2")
 	inputSpec.set("$rootDir/src/main/resources/schema-api.yaml")
 	outputDir.set("$buildDir/apidoc")
+}
+
+//スキーマからSpringコードを自動生成するためのタスク
+task buildSpringServer(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+	generatorName.set("spring")
+	inputSpec.set("$rootDir/src/main/resources/schema-api.yaml")
+	outputDir.set("$buildDir/spring")
+	apiPackage.set("com.example.todoapi.controller")
+	modelPackage.set("com.example.todoapi.model")
+	configOptions.set([
+			interfaceOnly: "true"
+	])
+	globalProperties.set([
+			modelDocs: "false"
+	])
 }
