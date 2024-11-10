@@ -52,3 +52,6 @@ task buildSpringServer(type: org.openapitools.generator.gradle.plugin.tasks.Gene
 
 // Javaコンパイル時、Springコード自動生成タスクを実行する
 compileJava.dependsOn tasks.buildSpringServer
+
+// 生成したSpringコード(クラス)を自動importする（import文）
+sourceSets.main.java.srcDir "$buildDir/spring/src/main/java"
