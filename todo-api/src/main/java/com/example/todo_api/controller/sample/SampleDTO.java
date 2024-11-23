@@ -10,22 +10,15 @@ package com.example.todo_api.controller.sample;
 // }
 //
 
+
+import lombok.Value;
+
 import java.time.LocalDateTime;
 
+// @Valueは Immutableなクラス自動生成
+
+@Value
 public class SampleDTO {
-    private String content;
-    private LocalDateTime timestamp;
-
-    public SampleDTO(String content, LocalDateTime timestamp) {
-        this.content = content;
-        this.timestamp = timestamp;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
+    String content;
+    LocalDateTime timestamp;
 }
