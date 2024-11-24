@@ -16,12 +16,20 @@ paths:
       responses:
         '200':
           description: OK
-  /tasks/1:
+  /tasks/{taskId}:
     get:
       tags:
         - tasks
       # operationId = TasksApi I/Fのメソッド名
       operationId: showTask
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: "Target task ID"
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
