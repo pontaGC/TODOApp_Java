@@ -14,6 +14,6 @@ class TaskServiceImpl implements TaskService{
     public TaskEntity find(Long taskId) {
         return this.taskRepository.select(taskId)
                 .map(record -> new TaskEntity(record.id(), record.title()))
-                .orElseThrow(() -> new IllegalStateException("TODO"));
+                .orElseThrow(() -> new TaskEntityNotFoundException(taskId));
     }
 }
