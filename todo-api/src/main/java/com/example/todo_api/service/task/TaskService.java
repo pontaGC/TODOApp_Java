@@ -3,5 +3,5 @@ package com.example.todo_api.service.task;
 
 public interface TaskService {
 
-    TaskEntity find();
+    TaskEntity find(Long taskId);
 }
