@@ -16,6 +16,16 @@ paths:
       responses:
         '200':
           description: OK
+  /tasks/:
+    post:
+      summary: "Create new task"
+      description: "Create new task item"
+      operationId: createTask
+      tags:
+        - tasks
+      responses:
+        201:
+          description: "Created"
   /tasks/{taskId}:
     get:
       tags:
