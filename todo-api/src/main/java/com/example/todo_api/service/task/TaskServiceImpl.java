@@ -16,4 +16,9 @@ class TaskServiceImpl implements TaskService{
                 .map(record -> new TaskEntity(record.id(), record.title()))
                 .orElseThrow(() -> new TaskEntityNotFoundException(taskId));
     }
+
+    @Override
+    public TaskEntity create(String title){
+        return  new TaskEntity(999L, title);
+    }
 }
