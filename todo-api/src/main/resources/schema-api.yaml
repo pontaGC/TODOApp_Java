@@ -24,8 +24,13 @@ paths:
       tags:
         - tasks
       responses:
-        201:
+        '201':
           description: "Created"
+          # contentはResponse bodyのスキーマ定義
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskDTO"
   /tasks/{taskId}:
     get:
       summary: "Get a task"
