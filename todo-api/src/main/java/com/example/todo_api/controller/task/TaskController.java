@@ -15,8 +15,13 @@ public class TaskController implements TasksApi {
     private final TaskService taskService;
 
     @Override
-    public ResponseEntity<Void> createTask() {
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<TaskDTO> createTask() {
+        var dto = new TaskDTO();
+        dto.setId(99L);
+        dto.setTitle("created!");
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(dto);
     }
 
     @Override
