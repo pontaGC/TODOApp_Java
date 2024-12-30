@@ -28,10 +28,12 @@ paths:
           description: "Created"
   /tasks/{taskId}:
     get:
-      tags:
-        - tasks
+      summary: "Get a task"
+      description: "Get one task with specified ID"
       # operationId = TasksApi I/Fのメソッド名
       operationId: showTask
+      tags:
+        - tasks
       parameters:
         - name: taskId
           in: path
