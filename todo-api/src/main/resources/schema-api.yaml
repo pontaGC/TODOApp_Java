@@ -85,6 +85,8 @@ components:
         title:
           type: string
           description: "Title of a task to create"
+          maxLength: 256
+          minLength: 1
       required:
         - title
     TaskDTO:

@@ -5,7 +5,6 @@ import com.example.todoapi.controller.TasksApi;
 import com.example.todoapi.model.TaskDTO;
 import com.example.todoapi.model.TaskForm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,4 +37,12 @@ public class TaskController implements TasksApi {
         body.setTitle(entity.getTitle());
         return ResponseEntity.ok(body);
     }
+
+    // コントローラ個別で例外処理したい場合、以下のようなに例外をハンドルできる
+    // コントローラ個別とコントローラ共通(ControllerAdvice)両方存在する場合、コントローラ個別が優先される
+//    @ExceptionHandler({MethodArgumentNotValidException.class})
+//    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex){
+//        var errors = ex.getFieldErrors();
+//        return ResponseEntity.badRequest().build();
+//    }
 }
