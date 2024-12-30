@@ -1,3 +1,9 @@
 package com.example.todo_api.repository.task;
 
-public record TaskRecord(long id, String title) { }
+import lombok.Value;
+
+@Value
+public class TaskRecord{
+    Long id;
+    String title;
+}
