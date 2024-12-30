@@ -32,6 +32,11 @@ paths:
       responses:
         '201':
           description: "Created"
+          headers:
+            location:
+              description: "URI of created task"
+              schema:
+                type: string
           # contentはResponse bodyのスキーマ定義
           content:
             application/json:
