@@ -17,6 +17,19 @@ paths:
         '200':
           description: OK
   /tasks/:
+    get:
+      summary: "Get task list"
+      description: "Get list of task items"
+      operationId: getTaskList
+      tags:
+        - tasks
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskListDTO"
     post:
       summary: "Create new task"
       description: "Create new task item"
@@ -89,6 +102,15 @@ components:
           minLength: 1
       required:
         - title
+    TaskListDTO:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/TaskDTO"
+      required:
+        - results
     TaskDTO:
       type: object
       properties:

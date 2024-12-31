@@ -5,6 +5,8 @@ import com.example.todo_api.repository.task.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 class TaskServiceImpl implements TaskService{
@@ -14,7 +16,7 @@ class TaskServiceImpl implements TaskService{
     @Override
     public TaskEntity find(Long taskId) {
         return this.taskRepository.select(taskId)
-                .map(record -> new TaskEntity(record.getId(), record.getTitle()))
+                .map(TaskServiceImpl::convertTaskRecord)
                 .orElseThrow(() -> new TaskEntityNotFoundException(taskId));
     }
 
@@ -24,5 +26,20 @@ class TaskServiceImpl implements TaskService{
         var record = new TaskRecord(null, title);
         this.taskRepository.insert(record);
         return new TaskEntity(record.getId(), record.getTitle());
+    }
+
+    @Override
+    public Iterable<TaskEntity> collectAll() {
+        var allTaskRecords = this.taskRepository.selectAll();
+        return allTaskRecords
+                .stream()
+                .map(TaskServiceImpl::convertTaskRecord)
+                .collect(Collectors.toList());
+    }
+
+    private static TaskEntity convertTaskRecord(TaskRecord source){
+        return new TaskEntity(
+                source.getId(),
+                source.getTitle());
     }
 }

@@ -5,12 +5,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
 public interface TaskRepository {
     @Select("SELECT id, title FROM tasks WHERE id = #{taskId}")
     Optional<TaskRecord> select(Long taskId);
+
+    @Select("SELECT id, title From tasks")
+    List<TaskRecord> selectAll();
 
     // MyBatisのInsert戻り値はVoid必須。
     // IDはDBの自動採番。@Options(~)自動でTaskRecord/idに値を入れてもらう
