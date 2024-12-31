@@ -13,8 +13,8 @@ public interface TaskRepository {
     @Select("SELECT id, title FROM tasks WHERE id = #{taskId}")
     Optional<TaskRecord> select(Long taskId);
 
-    @Select("SELECT id, title From tasks")
-    List<TaskRecord> selectAll();
+    @Select("SELECT id, title From tasks LIMIT #{limit} OFFSET #{offset}")
+    List<TaskRecord> selectTasks(int limit, long offset);
 
     // MyBatisのInsert戻り値はVoid必須。
     // IDはDBの自動採番。@Options(~)自動でTaskRecord/idに値を入れてもらう

@@ -29,8 +29,8 @@ class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public Iterable<TaskEntity> collectAll() {
-        var allTaskRecords = this.taskRepository.selectAll();
+    public Iterable<TaskEntity> collect(int limit, long offset) {
+        var allTaskRecords = this.taskRepository.selectTasks(limit, offset);
         return allTaskRecords
                 .stream()
                 .map(TaskServiceImpl::convertTaskRecord)

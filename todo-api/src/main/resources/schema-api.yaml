@@ -23,6 +23,27 @@ paths:
       operationId: getTaskList
       tags:
         - tasks
+      parameters:
+        - name: limit
+          in: query
+          required: true
+          description: "Max number of task list in resource."
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: offset
+          in: query
+          required: true
+          description: "Paging offset"
+          schema:
+            type: integer
+            # Task ID(Int64)と同じ大きさの整数が指定できるようにする
+            format: int64
+            minimum: 0
+            default: 0
       responses:
         '200':
           description: "OK"
@@ -102,9 +123,31 @@ components:
           minLength: 1
       required:
         - title
+    PageDTO:
+      description: "Paging information"
+      type: object
+      properties:
+        limit:
+          description: "Requested limit"
+          type: integer
+          format: int32
+        offset:
+          description: "Requested offset"
+          type: integer
+          format: int64
+        size:
+          description: "Number of task items retrieved"
+          type: integer
+          format: int32
+      required:
+        - limit
+        - offset
+        - size
     TaskListDTO:
       type: object
       properties:
+        page:
+          $ref: "#/components/schemas/PageDTO"
         results:
           type: array
           items:
@@ -171,5 +214,3 @@ components:
       required:
         - name
         - reason
-
-

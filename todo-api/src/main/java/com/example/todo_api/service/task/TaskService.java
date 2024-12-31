@@ -6,5 +6,5 @@ public interface TaskService {
 
     TaskEntity create(String title);
 
-    Iterable<TaskEntity> collectAll();
+    Iterable<TaskEntity> collect(int limit, long offset);
 }

@@ -3,6 +3,7 @@ package com.example.todo_api.controller.task;
 import com.example.todo_api.service.task.TaskEntity;
 import com.example.todo_api.service.task.TaskService;
 import com.example.todoapi.controller.TasksApi;
+import com.example.todoapi.model.PageDTO;
 import com.example.todoapi.model.TaskDTO;
 import com.example.todoapi.model.TaskForm;
 import com.example.todoapi.model.TaskListDTO;
@@ -43,12 +44,14 @@ public class TaskController implements TasksApi {
     }
 
     @Override
-    public ResponseEntity<TaskListDTO> getTaskList() {
-        var entities = this.taskService.collectAll();
-        var taskDTOs = convertTaskEntityToDTO(entities);
+    public ResponseEntity<TaskListDTO> getTaskList(Integer limit, Long offset) {
 
         var body = new TaskListDTO();
+
+        var entities = this.taskService.collect(limit, offset);
+        var taskDTOs = convertTaskEntityToDTO(entities);
         body.setResults(taskDTOs);
+        body.setPage(createPageDTO(limit, offset, taskDTOs.size()));
         return ResponseEntity.ok(body);
     }
 
@@ -67,6 +70,14 @@ public class TaskController implements TasksApi {
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
         return dto;
+    }
+
+    private static PageDTO createPageDTO(int limit, long offset, int size){
+        var pageDTO = new PageDTO();
+        pageDTO.setLimit(limit);
+        pageDTO.setOffset(offset);
+        pageDTO.setSize(size);
+        return pageDTO;
     }
 
     // コントローラ個別で例外処理したい場合、以下のようなに例外をハンドルできる
