@@ -51,6 +51,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TaskListDTO"
+        '400':
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
     post:
       summary: "Create new task"
       description: "Create new task item"
