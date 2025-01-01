@@ -55,6 +55,14 @@ public class TaskController implements TasksApi {
         return ResponseEntity.ok(body);
     }
 
+    @Override
+    public ResponseEntity<TaskDTO> editTask(Long taskId, TaskForm taskForm) {
+        var entity = this.taskService.update(taskId, taskForm.getTitle());
+
+        var body = convertTaskEntityToDTO(entity);
+        return ResponseEntity.ok().body(body);
+    }
+
     private static List<TaskDTO> convertTaskEntityToDTO(Iterable<TaskEntity> source){
         var results = new ArrayList<TaskDTO>();
         for (var entity : source){

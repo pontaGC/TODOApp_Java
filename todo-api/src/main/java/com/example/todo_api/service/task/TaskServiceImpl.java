@@ -37,9 +37,22 @@ class TaskServiceImpl implements TaskService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public TaskEntity update(Long taskId, String title) {
+        // Guard against unnecessary update
+        this.throwIfTaskEntityNotFound(taskId);
+
+        this.taskRepository.update(new TaskRecord(taskId, title));
+        return this.find(taskId);
+    }
+
     private static TaskEntity convertTaskRecord(TaskRecord source){
         return new TaskEntity(
                 source.getId(),
                 source.getTitle());
+    }
+
+    private void throwIfTaskEntityNotFound(Long taskId){
+        this.taskRepository.select(taskId).orElseThrow(() -> new TaskEntityNotFoundException(taskId));
     }
 }

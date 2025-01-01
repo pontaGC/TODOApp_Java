@@ -7,4 +7,6 @@ public interface TaskService {
     TaskEntity create(String title);
 
     Iterable<TaskEntity> collect(int limit, long offset);
+
+    TaskEntity update(Long taskId, String title);
 }
