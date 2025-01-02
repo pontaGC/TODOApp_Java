@@ -46,6 +46,12 @@ class TaskServiceImpl implements TaskService{
         return this.find(taskId);
     }
 
+    @Override
+    public void delete(Long taskId) {
+        this.throwIfTaskEntityNotFound(taskId);
+        this.taskRepository.delete(taskId);
+    }
+
     private static TaskEntity convertTaskRecord(TaskRecord source){
         return new TaskEntity(
                 source.getId(),

@@ -9,4 +9,6 @@ public interface TaskService {
     Iterable<TaskEntity> collect(int limit, long offset);
 
     TaskEntity update(Long taskId, String title);
+
+    void delete(Long taskId);
 }

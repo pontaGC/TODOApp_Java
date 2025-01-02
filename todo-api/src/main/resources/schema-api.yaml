@@ -157,6 +157,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResourceNotFoundError"
+    delete:
+      summary: "Delete a task"
+      description: "Delete the specified task"
+      operationId: deleteTask
+      tags:
+        - tasks
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: "Target task to be deleted"
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '204':
+          description: "No Content"
+        '404':
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundError"
 components:
   schemas:
     TaskForm:
